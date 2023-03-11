@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { createContext, useState } from "react";
+import "./App.css";
+import { TimerButtons } from "./Components/TimerButtons/TimerButtons";
+import { TimerINInput } from "./Components/TimerINInput/TimerINInput";
+
+export const TimerContext = createContext();
 
 function App() {
+  const [seconds, setSeconds] = useState("00");
+  const [minute, setMinute] = useState("00");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TimerContext.Provider
+        value={{ seconds: [seconds, setSeconds], minute: [minute, setMinute] }}
+      >
+        <TimerINInput />
+        <TimerButtons />
+      </TimerContext.Provider>
     </div>
   );
 }
