@@ -8,8 +8,14 @@ export function TimerINInput() {
     const [minute,setMinute] = valueOfTimer.minute;
     const [hour, setHour] = valueOfTimer.hour;
 
+    const reg = /^\d+$/;
+
     const secondsHandler = (e) => {
         const val = e.target.value;
+
+        if(!(reg.test(Number(val)))){
+            return
+        }
 
         if(Number(val) > 59){
             setSec("00")
@@ -31,7 +37,10 @@ export function TimerINInput() {
         const val = e.target.value;
 
         if(Number(val) > 59){
-            setMinute("59")
+            setMinute("00")
+            if(Number(hour) === 0){
+                setHour("01");
+            }
             return;
         }
         
