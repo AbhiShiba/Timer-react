@@ -6,6 +6,7 @@ export function TimerINInput() {
     const valueOfTimer = useContext(TimerContext)
     const [sec,setSec] = valueOfTimer.seconds;
     const [minute,setMinute] = valueOfTimer.minute;
+    const [hour, setHour] = valueOfTimer.hour;
 
     const secondsHandler = (e) => {
         const val = e.target.value;
@@ -41,9 +42,25 @@ export function TimerINInput() {
         setMinute(val)
     }
 
+    const HourHandler = (e) => {
+        const val = e.target.value;
+
+        if(Number(val) > 24){
+            setHour("24")
+            return;
+        }
+        
+        if(val.length > 2){
+            setHour(val.slice(0,2));
+            return;
+        }
+        setHour(val)
+    }
+
 
   return (
     <div>
+        <input className='input-timer' type="text" onChange={HourHandler} value={hour} />
         <input className='input-timer' type="text" onChange={MinuteHandler} value={minute} />
         <input className='input-timer' type="text" onChange={secondsHandler} value={sec} />
     </div>
